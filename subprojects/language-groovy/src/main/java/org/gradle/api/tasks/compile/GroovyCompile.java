@@ -330,7 +330,7 @@ public class GroovyCompile extends AbstractCompile implements HasCompileOptions 
      * @since 4.0
      */
     @Nested
-    @SuppressWarnings("deprecation")
+    @Deprecated
     protected org.gradle.jvm.toolchain.JavaToolChain getJavaToolChain() {
         return getJavaToolChainFactory().forCompileOptions(getOptions());
     }
