@@ -18,16 +18,16 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":baseServices"))
+    implementation(project(":base-services"))
     implementation(project(":logging"))
-    implementation(project(":processServices"))
+    implementation(project(":process-services"))
     implementation(project(":coreApi"))
     implementation(project(":modelCore"))
     implementation(project(":core"))
     implementation(project(":reporting"))
     implementation(project(":plugins"))
     implementation(project(":workers"))
-    implementation(project(":dependencyManagement")) // Required by JavaScriptExtension#getGoogleApisRepository()
+    implementation(project(":dependency-management")) // Required by JavaScriptExtension#getGoogleApisRepository()
 
     implementation(libs.groovy)
     implementation(libs.slf4jApi)
@@ -39,10 +39,10 @@ dependencies {
 
     testImplementation(testFixtures(project(":core")))
 
-    testRuntimeOnly(project(":distributionsCore")) {
+    testRuntimeOnly(project(":distributions-core")) {
         because("ProjectBuilder tests load services from a Gradle distribution.")
     }
-    integTestDistributionRuntimeOnly(project(":distributionsFull"))
+    integTestDistributionRuntimeOnly(project(":distributions-full"))
 }
 
 classycle {

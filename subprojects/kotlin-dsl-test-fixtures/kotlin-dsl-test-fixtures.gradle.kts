@@ -23,11 +23,11 @@ description = "Kotlin DSL Test Fixtures"
 dependencies {
     api(project(":kotlinDsl"))
 
-    implementation(project(":baseServices"))
+    implementation(project(":base-services"))
     implementation(project(":coreApi"))
     implementation(project(":core"))
     implementation(project(":resources"))
-    implementation(project(":kotlinDslToolingBuilders"))
+    implementation(project(":kotlin-dsl-tooling-builders"))
     implementation(project(":testKit"))
     implementation(project(":internalTesting"))
     implementation(project(":internalIntegTesting"))
@@ -37,7 +37,7 @@ dependencies {
     implementation(libs.jacksonKotlin)
     implementation(libs.asm)
 
-    testRuntimeOnly(project(":distributionsJvm")) {
+    testRuntimeOnly(project(":distributions-jvm")) {
         because("SimplifiedKotlinScriptEvaluator reads default imports from the distribution (default-imports.txt).")
     }
 }

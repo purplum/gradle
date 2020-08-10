@@ -29,7 +29,7 @@ dependencies {
     implementation(libs.nativePlatform)
     implementation(libs.slf4jApi)
 
-    testImplementation(project(":processServices"))
+    testImplementation(project(":process-services"))
     testImplementation(project(":resources"))
     testImplementation(project(":persistentCache"))
     testImplementation(project(":buildOption"))
@@ -39,5 +39,5 @@ dependencies {
 
     integTestImplementation(libs.jetty)
 
-    integTestDistributionRuntimeOnly(project(":distributionsCore"))
+    integTestDistributionRuntimeOnly(project(":distributions-core"))
 }
