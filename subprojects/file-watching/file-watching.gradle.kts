@@ -27,6 +27,7 @@ dependencies {
 
     implementation(libs.guava)
     implementation(libs.nativePlatform)
+    implementation(libs.nativePlatformFileEvents)
     implementation(libs.slf4jApi)
 
     testImplementation(project(":processServices"))
