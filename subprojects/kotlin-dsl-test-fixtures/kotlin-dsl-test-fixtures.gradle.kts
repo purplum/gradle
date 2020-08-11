@@ -21,16 +21,16 @@ plugins {
 description = "Kotlin DSL Test Fixtures"
 
 dependencies {
-    api(project(":kotlinDsl"))
+    api(project(":kotlin-dsl"))
 
     implementation(project(":base-services"))
-    implementation(project(":coreApi"))
+    implementation(project(":core-api"))
     implementation(project(":core"))
     implementation(project(":resources"))
     implementation(project(":kotlin-dsl-tooling-builders"))
-    implementation(project(":testKit"))
-    implementation(project(":internalTesting"))
-    implementation(project(":internalIntegTesting"))
+    implementation(project(":test-kit"))
+    implementation(project(":internal-testing"))
+    implementation(project(":internal-integ-testing"))
 
     implementation(libs.junit)
     implementation(libs.mockitoKotlin)

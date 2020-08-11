@@ -23,7 +23,7 @@ description = "File system watchers for keeping the VFS up-to-date"
 dependencies {
     api(project(":snapshots"))
 
-    implementation(project(":baseAnnotations"))
+    implementation(project(":base-annotations"))
 
     implementation(libs.guava)
     implementation(libs.nativePlatform)
@@ -31,10 +31,10 @@ dependencies {
 
     testImplementation(project(":process-services"))
     testImplementation(project(":resources"))
-    testImplementation(project(":persistentCache"))
-    testImplementation(project(":buildOption"))
+    testImplementation(project(":persistent-cache"))
+    testImplementation(project(":build-option"))
     testImplementation(testFixtures(project(":core")))
-    testImplementation(testFixtures(project(":fileCollections")))
+    testImplementation(testFixtures(project(":file-collections")))
     testImplementation(libs.commonsIo)
 
     integTestImplementation(libs.jetty)
