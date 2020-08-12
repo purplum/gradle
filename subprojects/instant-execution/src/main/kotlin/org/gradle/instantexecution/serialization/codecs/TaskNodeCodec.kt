@@ -16,15 +16,12 @@
 
 package org.gradle.instantexecution.serialization.codecs
 
-import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.FileCollection
 import org.gradle.api.internal.GeneratedSubclasses
 import org.gradle.api.internal.TaskInputsInternal
 import org.gradle.api.internal.TaskInternal
 import org.gradle.api.internal.TaskOutputsInternal
-import org.gradle.api.internal.project.ProjectState
-import org.gradle.api.internal.project.ProjectStateRegistry
 import org.gradle.api.internal.provider.Providers
 import org.gradle.api.internal.tasks.TaskDestroyablesInternal
 import org.gradle.api.internal.tasks.TaskLocalStateInternal
@@ -54,7 +51,6 @@ import org.gradle.instantexecution.serialization.readCollection
 import org.gradle.instantexecution.serialization.readCollectionInto
 import org.gradle.instantexecution.serialization.readEnum
 import org.gradle.instantexecution.serialization.readNonNull
-import org.gradle.instantexecution.serialization.runWriteOperation
 import org.gradle.instantexecution.serialization.withIsolate
 import org.gradle.instantexecution.serialization.withPropertyTrace
 import org.gradle.instantexecution.serialization.writeCollection
@@ -63,16 +59,13 @@ import org.gradle.util.DeferredUtil
 
 
 class TaskNodeCodec(
-    private val projectStateRegistry: ProjectStateRegistry,
     private val userTypesCodec: Codec<Any?>,
     private val taskNodeFactory: TaskNodeFactory
 ) : Codec<LocalTaskNode> {
 
     override suspend fun WriteContext.encode(value: LocalTaskNode) {
         val task = value.task
-        runWriteOperationWithMutableStateOf(task.project) {
-            writeTask(task)
-        }
+        writeTask(task)
     }
 
     override suspend fun ReadContext.decode(): LocalTaskNode {
@@ -190,16 +183,6 @@ class TaskNodeCodec(
     suspend fun ReadContext.readLocalStateOf(task: TaskInternal) {
         if (readBoolean()) {
             task.localState.register(readNonNull<FileCollection>())
-        }
-    }
-
-    /**
-     * Runs the suspending [operation] against the [public mutable state][ProjectState.withMutableState] of [project].
-     */
-    private
-    fun WriteContext.runWriteOperationWithMutableStateOf(project: Project, operation: suspend WriteContext.() -> Unit) {
-        projectStateRegistry.stateFor(project).withMutableState {
-            runWriteOperation(operation)
         }
     }
 }
