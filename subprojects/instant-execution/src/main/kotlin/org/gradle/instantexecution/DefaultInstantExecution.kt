@@ -323,7 +323,6 @@ class DefaultInstantExecution internal constructor(
             fileResolver = service(),
             instantiator = service(),
             listenerManager = service(),
-            projectStateRegistry = service(),
             taskNodeFactory = service(),
             fingerprinterRegistry = service(),
             buildOperationExecutor = service(),
