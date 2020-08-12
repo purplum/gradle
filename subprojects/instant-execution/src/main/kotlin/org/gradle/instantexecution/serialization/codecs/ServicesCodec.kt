@@ -32,7 +32,8 @@ class ServicesCodec : EncodingProducer, Decoding {
         }
     }
 
-    private fun serviceType(type: Class<*>): Class<*>? {
+    private
+    fun serviceType(type: Class<*>): Class<*>? {
         if (type.getAnnotation(ServiceScope::class.java) != null) {
             return type
         }
