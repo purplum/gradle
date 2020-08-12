@@ -25,12 +25,14 @@ class ServicesCodec : EncodingProducer, Decoding {
     override fun encodingForType(type: Class<*>): Encoding? {
         // Only handle build tree scoped service for now
         // TODO - perhaps query the isolate owner to see whether the value is in fact a service
-        return if (type.getAnnotation(ServiceScope::class.java) != null) {
+        return if (hasServiceScopeAnnotation(type)) {
             OwnerServiceEncoding
         } else {
             null
         }
     }
+
+    private fun hasServiceScopeAnnotation(type: Class<*>): Boolean = type.getAnnotation(ServiceScope::class.java) != null || type.interfaces.any { hasServiceScopeAnnotation(it) }
 
     override suspend fun ReadContext.decode(): Any? {
         return isolate.owner.service(readClass())
